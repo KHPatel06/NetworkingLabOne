@@ -22,7 +22,7 @@ class BookViewHolder(val binding: ListItemLayoutBinding) : RecyclerView.ViewHold
             authorNameString = "$authorNameString$authorName"
         }
 
-        binding.authorView.text = authorNameStrin
+        binding.authorView.text = authorNameString
     }
 
 }
