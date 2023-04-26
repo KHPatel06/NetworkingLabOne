@@ -21,4 +21,16 @@ class GoogleBooksVolumeInfo{
 
     @Json(name = "authors")
     lateinit var author : List<String>
+
+    @Json(name = "infoLink")
+    lateinit var url: String
+
+    @Json(name = "imageLinks")
+    lateinit var bookImageLinks: imageLinks
 }
+
+class imageLinks{
+    @Json(name = "smallThumbnail")
+    var link : String = ""
+}
+

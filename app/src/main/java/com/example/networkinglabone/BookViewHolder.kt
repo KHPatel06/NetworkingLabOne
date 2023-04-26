@@ -1,7 +1,12 @@
 package com.example.networkinglabone
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.view.View
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.networkinglabone.databinding.ListItemLayoutBinding
 
 class BookViewHolder(val binding: ListItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -19,10 +24,24 @@ class BookViewHolder(val binding: ListItemLayoutBinding) : RecyclerView.ViewHold
         var authorNameString = ""
 
         for(authorName in currentBook.author){
-            authorNameString = "$authorNameString$authorName"
+            if(authorName != currentBook.author.last())
+                authorNameString = "$authorNameString$authorName, "
+            else
+                authorNameString = "$authorNameString$authorName"
         }
 
+        val imageUri = currentBook.imageLink.toUri().buildUpon().scheme("https").build()
+        Glide.with(itemView.context).load(imageUri).into(binding.bookImage)
+
         binding.authorView.text = authorNameString
+    }
+
+    init{
+        binding.root.setOnClickListener{view ->
+            val bookUri = Uri.parse(currentBook.url)
+            val websiteIntent = Intent(Intent.ACTION_VIEW, bookUri)
+            itemView.context.startActivity(websiteIntent)
+        }
     }
 
 }

@@ -28,12 +28,15 @@ class BookViewModel: ViewModel() {
 
                 for(bookItems in bookItemsList){
                     val bookVolumeInfo = bookItems.googleBooksInfo
+                    val bookImageLinks = bookItems.googleBooksInfo.bookImageLinks
 
                     val title = bookVolumeInfo.title
                     val subtitle = bookVolumeInfo.subtitle
                     val authors = bookVolumeInfo.author
+                    val url = bookVolumeInfo.url
+                    val imageLink = bookImageLinks.link
 
-                    val newBook = Book(title, subtitle, authors)
+                    val newBook = Book(title, subtitle, authors, url, imageLink)
                     listOfBooksFetched.add(newBook)
                 }
                 _response.value = listOfBooksFetched
